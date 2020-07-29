@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="rewind">#E4381B</color>
+    <color name="stop">#3D9C10</color>
+    <color name="play">#EAC506</color>
+    <color name="forward">#1D5FDF</color>
+</resources>

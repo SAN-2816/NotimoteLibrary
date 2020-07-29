@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sound">음 량</string>
+    <string name="playlist">재생 목록</string>
+    <string name="channel">채 널</string>
+</resources>

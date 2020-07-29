@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="horizontal">
+
+    <TextView
+        style="@style/TextAppearance.Compat.Notification.Title"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/channel" />
+
+    <ImageButton
+        android:id="@+id/notimote_ImageButton_channel_channelDown"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_weight="2"
+        android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
+
+    <ImageButton
+        android:id="@+id/notimote_ImageButton_channel_channelUp"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_weight="2"
+        android:src="@drawable/ic_baseline_keyboard_arrow_up_24" />
+</LinearLayout>
