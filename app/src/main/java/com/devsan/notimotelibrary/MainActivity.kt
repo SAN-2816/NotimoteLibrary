@@ -11,10 +11,19 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val notificationManager: NotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        val notimote = Notimote(this,"1010", NotimoteReceiver::class.java)
-        notimote.setPlayStopLayout(View.VISIBLE, "rewind", "stop", "play", "forward")
-        notimote.setHomeLayout(View.VISIBLE, "exit", "home", "before")
-        notimote.createNotify(notificationManager)
+        val notificationManager: NotificationManager =
+            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        notimoteView {
+            with { this@MainActivity }
+            channel { "1000" }
+            javaClass { NotimoteReceiver::class.java }
+            notificationManager{notificationManager}
+        }
+//        val notimote = Notimote(this,"1010", NotimoteReceiver::class.java)
+//        notimote.setPlayStopLayout(View.VISIBLE, "rewind", "stop", "play", "forward")
+//        notimote.setHomeLayout(View.VISIBLE, "exit", "home", "before")
+//        notimote.createNotify(notificationManager)
     }
+
+    fun notimoteView(lambda: Notimote.() -> Unit) = Notimote().apply(lambda).build()
 }
