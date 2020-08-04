@@ -14,11 +14,11 @@ import java.lang.StringBuilder
 
 class Notimote {
     private lateinit var mContext: Context
-    private lateinit var mChannel: String
+    private lateinit var mChannel: String // 채널을 만들어줄지 만들어서 넣으라고 할지 정해야함.
     private lateinit var mJavaClass: Class<*>
-    private lateinit var smallNotificationLayout: RemoteViews
-    private lateinit var bigNotificationLayout: RemoteViews
+
     private lateinit var notificationManager: NotificationManager
+//    private lateinit var notificationChannel: NotificationChannel
 
     fun with(context: () -> Context) {
         this.mContext = context()
@@ -36,32 +36,12 @@ class Notimote {
         this.notificationManager = notificationManager()
     }
 
-    fun build() {
-        smallNotificationLayout = RemoteViews(mContext.packageName, R.layout.notimote_layout_small)
-        bigNotificationLayout = RemoteViews(mContext.packageName, R.layout.notimote_layout_big)
+//    fun notificationChannel(notificationChannel: () -> NotificationChannel) {
+//        this.notificationChannel = notificationChannel()
+//    }
 
-        val customNotification: NotificationCompat.Builder =
-            NotificationCompat.Builder(mContext, mChannel)
-                .setSmallIcon(R.drawable.ic_baseline_settings_remote_24)
-                .setStyle(NotificationCompat.DecoratedCustomViewStyle())
-                .setCustomContentView(smallNotificationLayout)
-                .setCustomBigContentView(bigNotificationLayout)
-                .setOngoing(true)
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val name = "Notimote"
-            val descriptionText = "Notify RemoteController"
-            val importance = NotificationManager.IMPORTANCE_DEFAULT
-            val channel = NotificationChannel(mChannel, name, importance).apply {
-                description = descriptionText
-            }
-            notificationManager.createNotificationChannel(channel)
-            notificationManager.notify(mChannel.toInt(), customNotification.build())
-        } else {
-            customNotification.notification
-        }
-    }
-
+    fun build() =
+        NotimoteView().createView(mContext, mChannel, notificationManager)
 }
 //class Notimote(context: Context, channelId: String, javaClass: Class<*>) {
 ////    //노티 커스텀 뷰 생성 1. 큰 레이아웃 2. 작은 레이아웃

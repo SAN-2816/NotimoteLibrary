@@ -1,7 +1,9 @@
 package com.devsan.notimotelibrary
 
+import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -13,11 +15,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val notificationManager: NotificationManager =
             getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
         notimoteView {
             with { this@MainActivity }
             channel { "1000" }
             javaClass { NotimoteReceiver::class.java }
-            notificationManager{notificationManager}
+            notificationManager { notificationManager }
         }
 //        val notimote = Notimote(this,"1010", NotimoteReceiver::class.java)
 //        notimote.setPlayStopLayout(View.VISIBLE, "rewind", "stop", "play", "forward")
