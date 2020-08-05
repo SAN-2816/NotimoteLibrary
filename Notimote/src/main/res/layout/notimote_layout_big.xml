@@ -4,28 +4,29 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <include
-        android:id="@+id/notimote_layout_power"
-        layout="@layout/notimote_layout_power" />
+    <!--    <include-->
+    <!--        android:id="@+id/notimote_layout_power"-->
+    <!--        layout="@layout/notimote_layout_power" />-->
+    <include layout="@layout/notimote_layout_small"/>
 
     <include
         android:id="@+id/notimote_layout_sound"
-        android:visibility="gone"
-        layout="@layout/notimote_layout_sound" />
+        layout="@layout/notimote_layout_sound"
+        android:visibility="gone" />
 
     <include
         android:id="@+id/notimote_layout_channel"
-        android:visibility="gone"
-        layout="@layout/notimote_layout_channel" />
+        layout="@layout/notimote_layout_channel"
+        android:visibility="gone" />
 
     <include
         android:id="@+id/notimote_layout_home"
-        android:visibility="gone"
-        layout="@layout/notimote_layout_home" />
+        layout="@layout/notimote_layout_home"
+        android:visibility="gone" />
 
     <include
         android:id="@+id/notimote_layout_playstop"
-        android:visibility="gone"
-        layout="@layout/notimote_layout_playstop" />
+        layout="@layout/notimote_layout_playstop"
+        android:visibility="gone" />
 
 </LinearLayout>
