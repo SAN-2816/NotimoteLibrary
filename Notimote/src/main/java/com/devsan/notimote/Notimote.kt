@@ -32,14 +32,14 @@ open class Notimote {
     private lateinit var mChannel: String // SDK 26 미만을 위해 채널을 String으로 받음.
     private lateinit var mNotificationManager: NotificationManager
     private lateinit var mNotificationChannel: NotificationChannel
-    private var iconID = 0
+    private var mIconID = 0
 
     //View 생성.
     private fun build() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            notimoteView.createView(mNotificationManager, mNotificationChannel, iconID)
+            notimoteView.createView(mNotificationManager, mNotificationChannel, mIconID)
         } else {
-            notimoteView.createView(mNotificationManager, mChannel, iconID)
+            notimoteView.createView(mNotificationManager, mChannel, mIconID)
         }
     }
 
@@ -78,7 +78,7 @@ open class Notimote {
     }
 
     fun iconID(iconID: () -> Int) {
-        this.iconID = iconID()
+        this.mIconID = iconID()
     }
 
     fun setLayoutVisible(layoutID: String, visible: Int) {
