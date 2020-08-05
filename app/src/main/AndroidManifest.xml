@@ -15,7 +15,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-    <receiver android:name=".NotimoteReceiver"/>
+        <receiver android:name=".MainReceiver"/>
     </application>
 
 </manifest>

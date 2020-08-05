@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.devsan.notimote.Notimote
-import com.devsan.notimote.NotimoteView
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,20 +24,20 @@ class MainActivity : AppCompatActivity() {
 
             Notimote().init {
                 with { this@MainActivity }
-                receiverClass { NotimoteReceiver::class.java }
+                receiverClass { MainReceiver::class.java }
                 notificationManager { notificationManager }
                 notificationChannel { channel }
                 iconID { R.drawable.ic_launcher_background }
-                setLayoutVisible(NotimoteView.SOUND, View.VISIBLE)
+                setLayoutVisible(Notimote.SOUND, View.VISIBLE)
             }
         }else{
             Notimote().init {
                 with { this@MainActivity }
-                receiverClass { NotimoteReceiver::class.java }
+                receiverClass { MainReceiver::class.java }
                 notificationManager { notificationManager }
                 channel { "1010" }
                 iconID { R.drawable.ic_launcher_background }
-                setLayoutVisible(NotimoteView.SOUND, View.VISIBLE)
+                setLayoutVisible(Notimote.SOUND, View.VISIBLE)
             }
         }
     }

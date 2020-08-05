@@ -1,14 +1,12 @@
 package com.devsan.notimotelibrary
 
-import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.util.Log
-import com.devsan.notimote.NotimoteView
+import com.devsan.notimote.NotimoteReceiver
 
-class NotimoteReceiver: BroadcastReceiver() {
+class MainReceiver :NotimoteReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
-        Log.e("receive", intent?.action)
-
+        Log.e("receiver", intent?.action)
     }
 }
