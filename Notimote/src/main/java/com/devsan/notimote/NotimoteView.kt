@@ -29,8 +29,13 @@ class NotimoteView(context: Context) {
     }
 
     private fun buildNotification(channelID: String, iconID: Int): NotificationCompat.Builder {
+        val icon: Int = if (iconID == 0) {
+            R.drawable.ic_baseline_settings_remote_24
+        } else {
+            iconID
+        }
         return NotificationCompat.Builder(mContext, channelID)
-            .setSmallIcon(iconID)// 아이콘 받아야함...
+            .setSmallIcon(icon)// 아이콘 받아야함...
             .setStyle(NotificationCompat.DecoratedCustomViewStyle())
             .setCustomContentView(mSmallNotificationLayout)
             .setCustomBigContentView(mBigNotificationLayout)

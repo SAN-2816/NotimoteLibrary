@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
                 notificationManager { notificationManager }
                 notificationChannel { channel }
                 iconID { R.drawable.ic_launcher_background }
-                setLayoutVisible(Notimote.SOUND, View.VISIBLE)
+                setLayoutVisible(arrayOf(Notimote.SOUND, Notimote.CHANNEL, Notimote.HOME, Notimote.PLAYSTOP), View.VISIBLE)
             }
         }else{
             Notimote().init {
@@ -36,8 +36,7 @@ class MainActivity : AppCompatActivity() {
                 receiverClass { MainReceiver::class.java }
                 notificationManager { notificationManager }
                 channel { "1010" }
-                iconID { R.drawable.ic_launcher_background }
-                setLayoutVisible(Notimote.SOUND, View.VISIBLE)
+                setLayoutVisible(arrayOf(Notimote.SOUND, Notimote.CHANNEL, Notimote.PLAYSTOP), View.VISIBLE)
             }
         }
     }
