@@ -28,7 +28,7 @@ class NotimoteView(context: Context) {
         return PendingIntent.getBroadcast(mContext, channelID.toInt(), intent, 0)
     }
 
-    private fun notifyBuilder(channelID: String, iconID: Int): NotificationCompat.Builder {
+    private fun buildNotification(channelID: String, iconID: Int): NotificationCompat.Builder {
         return NotificationCompat.Builder(mContext, channelID)
             .setSmallIcon(iconID)// 아이콘 받아야함...
             .setStyle(NotificationCompat.DecoratedCustomViewStyle())
@@ -72,7 +72,7 @@ class NotimoteView(context: Context) {
     ) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val customNotification: NotificationCompat.Builder =
-                notifyBuilder(notificationChannel.id, iconID)
+                buildNotification(notificationChannel.id, iconID)
             notificationManager.createNotificationChannel(notificationChannel)
             notificationManager.notify(
                 notificationChannel.id.toInt(),
@@ -88,7 +88,7 @@ class NotimoteView(context: Context) {
     ) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
             val customNotification: NotificationCompat.Builder =
-                notifyBuilder(channelID, iconID)
+                buildNotification(channelID, iconID)
             notificationManager.notify(
                 channelID.toInt(),
                 customNotification.build()
