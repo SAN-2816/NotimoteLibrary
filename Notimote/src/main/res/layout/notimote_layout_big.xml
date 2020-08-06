@@ -7,7 +7,7 @@
     <!--    <include-->
     <!--        android:id="@+id/notimote_layout_power"-->
     <!--        layout="@layout/notimote_layout_power" />-->
-    <include layout="@layout/notimote_layout_small"/>
+    <include layout="@layout/notimote_layout_small" />
 
     <include
         android:id="@+id/notimote_layout_sound"

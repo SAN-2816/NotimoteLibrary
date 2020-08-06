@@ -9,21 +9,22 @@ import android.os.Build
 open class Notimote {
     companion object {
         const val POWER = "notimote.power"
+        const val POWER_BUTTON = "notimote.power_button"
         const val SOUND = "notimote.sound"
-        const val SOUND_UP = "notimote.sound_up"
-        const val SOUND_DOWN = "notimote.sound_down"
+        const val SOUND_BUTTON_UP = "notimote.sound_up"
+        const val SOUND_BUTTON_DOWN = "notimote.sound_down"
         const val CHANNEL = "notimote.channel"
-        const val CHANNEL_UP = "notimote.channel_up"
-        const val CHANNEL_DOWN = "notimote.channel_down"
+        const val CHANNEL_BUTTON_UP = "notimote.channel_up"
+        const val CHANNEL_BUTTON_DOWN = "notimote.channel_down"
         const val PLAYSTOP = "notimote.playstop"
-        const val PLAYSTOP_REWIND = "notimote.playstop_rewind"
-        const val PLAYSTOP_STOP = "notimote.playstop_stop"
-        const val PLAYSTOP_PLAY = "notimote.playstop_play"
-        const val PLAYSTOP_FORWARD = "notimote.playstop_forward"
+        const val PLAYSTOP_BUTTON_REWIND = "notimote.playstop_rewind"
+        const val PLAYSTOP_BUTTON_STOP = "notimote.playstop_stop"
+        const val PLAYSTOP_BUTTON_PLAY = "notimote.playstop_play"
+        const val PLAYSTOP_BUTTON_FORWARD = "notimote.playstop_forward"
         const val HOME = "notimote.home"
-        const val HOME_EXIT = "notimote.home_exit"
-        const val HOME_HOME = "notimote.home_home"
-        const val HOME_BEFORE = "notimote.home_befor"
+        const val HOME_BUTTON_EXIT = "notimote.home_exit"
+        const val HOME_BUTTON_HOME = "notimote.home_home"
+        const val HOME_BUTTON_BEFORE = "notimote.home_before"
     }
 
     private lateinit var notimoteView: NotimoteView
@@ -83,6 +84,10 @@ open class Notimote {
 
     fun setLayoutVisible(layoutID: String, visible: Int) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            notimoteView.setButtonPower(
+                mReceiverClass,
+                mNotificationChannel.id.toString()
+            )
             notimoteView.setLayoutVisible(
                 mReceiverClass,
                 mNotificationChannel.id.toString(),
@@ -90,11 +95,20 @@ open class Notimote {
                 visible
             )
         } else {
+            notimoteView.setButtonPower(
+                mReceiverClass,
+                layoutID
+            )
             notimoteView.setLayoutVisible(mReceiverClass, mChannel, layoutID, visible)
         }
     }
 
     fun setLayoutVisible(layoutIDs: Array<String>, visible: Int) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            notimoteView.setButtonPower(mReceiverClass, mNotificationChannel.id)
+        } else {
+            notimoteView.setButtonPower(mReceiverClass, mChannel)
+        }
         for (id in layoutIDs) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 notimoteView.setLayoutVisible(

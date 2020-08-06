@@ -27,16 +27,18 @@ class MainActivity : AppCompatActivity() {
                 receiverClass { MainReceiver::class.java }
                 notificationManager { notificationManager }
                 notificationChannel { channel }
-                iconID { R.drawable.ic_launcher_background }
-                setLayoutVisible(arrayOf(Notimote.SOUND, Notimote.CHANNEL, Notimote.HOME, Notimote.PLAYSTOP), View.VISIBLE)
+                setLayoutVisible(arrayOf(Notimote.SOUND, Notimote.CHANNEL, Notimote.PLAYSTOP), View.VISIBLE)
             }
-        }else{
+        } else {
             Notimote().init {
                 with { this@MainActivity }
                 receiverClass { MainReceiver::class.java }
                 notificationManager { notificationManager }
                 channel { "1010" }
-                setLayoutVisible(arrayOf(Notimote.SOUND, Notimote.CHANNEL, Notimote.PLAYSTOP), View.VISIBLE)
+                setLayoutVisible(
+                    arrayOf(Notimote.SOUND, Notimote.CHANNEL, Notimote.PLAYSTOP),
+                    View.VISIBLE
+                )
             }
         }
     }

@@ -8,6 +8,7 @@ import android.content.Intent
 import android.os.Build
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
+import androidx.core.content.ContextCompat.getSystemService
 
 // 레아이웃 설정 및 버튼 설정 추가 해야함.
 class NotimoteView(context: Context) {
@@ -42,34 +43,7 @@ class NotimoteView(context: Context) {
             .setOngoing(true)
     }
 
-    fun setLayoutVisible(receiver: Class<*>, channelID: String, layout: String, visible: Int) {
-        when (layout) {
-            Notimote.SOUND -> {
-                mBigNotificationLayout.setViewVisibility(R.id.notimote_layout_sound, visible)
-                mBigNotificationLayout.setOnClickPendingIntent(
-                    R.id.notimote_ImageButton_soundUp,
-                    makePendingIntent(receiver, channelID, Notimote.CHANNEL_UP)
-                )
-                mBigNotificationLayout.setOnClickPendingIntent(
-                    R.id.notimote_ImageButton_soundDown,
-                    makePendingIntent(receiver, channelID, Notimote.SOUND_DOWN)
-                )
-            }
-            Notimote.CHANNEL -> mBigNotificationLayout.setViewVisibility(
-                R.id.notimote_layout_channel,
-                visible
-            )
-            Notimote.PLAYSTOP -> mBigNotificationLayout.setViewVisibility(
-                R.id.notimote_layout_playstop,
-                visible
-            )
-            Notimote.HOME -> mBigNotificationLayout.setViewVisibility(
-                R.id.notimote_layout_home,
-                visible
-            )
-        }
-    }
-
+    // SDK 26 이상
     fun createView(
         notificationManager: NotificationManager,
         notificationChannel: NotificationChannel,
@@ -86,10 +60,12 @@ class NotimoteView(context: Context) {
         }
     }
 
+    // SDK 26 미만
     fun createView(
         notificationManager: NotificationManager,
         channelID: String,
         iconID: Int
+
     ) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
             val customNotification: NotificationCompat.Builder =
@@ -98,6 +74,87 @@ class NotimoteView(context: Context) {
                 channelID.toInt(),
                 customNotification.build()
             )
+        }
+    }
+
+    fun setButtonPower(receiver: Class<*>, channelID: String){
+        mBigNotificationLayout.setOnClickPendingIntent(
+            R.id.notimote_ImageButton_power,
+            makePendingIntent(receiver, channelID, Notimote.POWER_BUTTON)
+        )
+    }
+
+    fun setTextPowerPlaylist(){
+
+    }
+
+    fun setLayoutVisible(receiver: Class<*>, channelID: String, layout: String, visible: Int) {
+        when (layout) {
+            Notimote.SOUND -> {
+                mBigNotificationLayout.setViewVisibility(R.id.notimote_layout_sound, visible)
+                mBigNotificationLayout.setOnClickPendingIntent(
+                    R.id.notimote_ImageButton_soundUp,
+                    makePendingIntent(receiver, channelID, Notimote.SOUND_BUTTON_UP)
+                )
+                mBigNotificationLayout.setOnClickPendingIntent(
+                    R.id.notimote_ImageButton_soundDown,
+                    makePendingIntent(receiver, channelID, Notimote.SOUND_BUTTON_DOWN)
+                )
+            }
+            Notimote.CHANNEL -> {
+                mBigNotificationLayout.setViewVisibility(
+                    R.id.notimote_layout_channel,
+                    visible
+                )
+                mBigNotificationLayout.setOnClickPendingIntent(
+                    R.id.notimote_ImageButton_channel_channelUp,
+                    makePendingIntent(receiver, channelID, Notimote.CHANNEL_BUTTON_UP)
+                )
+                mBigNotificationLayout.setOnClickPendingIntent(
+                    R.id.notimote_ImageButton_channel_channelDown,
+                    makePendingIntent(receiver, channelID, Notimote.CHANNEL_BUTTON_DOWN)
+                )
+            }
+            Notimote.PLAYSTOP -> {
+                mBigNotificationLayout.setViewVisibility(
+                    R.id.notimote_layout_playstop,
+                    visible
+                )
+                mBigNotificationLayout.setOnClickPendingIntent(
+                    R.id.notimote_ImageButton_rewind,
+                    makePendingIntent(receiver, channelID, Notimote.PLAYSTOP_BUTTON_REWIND)
+                )
+                mBigNotificationLayout.setOnClickPendingIntent(
+                    R.id.notimote_ImageButton_play,
+                    makePendingIntent(receiver, channelID, Notimote.PLAYSTOP_BUTTON_PLAY)
+                )
+                mBigNotificationLayout.setOnClickPendingIntent(
+                    R.id.notimote_ImageButton_stop,
+                    makePendingIntent(receiver, channelID, Notimote.PLAYSTOP_BUTTON_STOP)
+                )
+                mBigNotificationLayout.setOnClickPendingIntent(
+                    R.id.notimote_ImageButton_forward,
+                    makePendingIntent(receiver, channelID, Notimote.PLAYSTOP_BUTTON_FORWARD)
+                )
+            }
+            Notimote.HOME -> {
+                mBigNotificationLayout.setViewVisibility(
+                    R.id.notimote_layout_home,
+                    visible
+                )
+                mBigNotificationLayout.setOnClickPendingIntent(
+                    R.id.notimote_ImageButton_exit,
+                    makePendingIntent(receiver, channelID, Notimote.HOME_BUTTON_EXIT)
+                )
+                mBigNotificationLayout.setOnClickPendingIntent(
+                    R.id.notimote_ImageButton_home,
+                    makePendingIntent(receiver, channelID, Notimote.HOME_BUTTON_HOME)
+                )
+                mBigNotificationLayout.setOnClickPendingIntent(
+                    R.id.notimote_ImageButton_before,
+                    makePendingIntent(receiver, channelID, Notimote.HOME_BUTTON_BEFORE)
+                )
+            }
         }
     }
 }
