@@ -77,19 +77,22 @@ class NotimoteView(context: Context) {
         }
     }
 
-    fun setButtonPower(receiver: Class<*>, channelID: String){
-        mBigNotificationLayout.setOnClickPendingIntent(
-            R.id.notimote_ImageButton_power,
-            makePendingIntent(receiver, channelID, Notimote.POWER_BUTTON)
-        )
-    }
-
     fun setTextPowerPlaylist(){
 
     }
 
     fun setLayoutVisible(receiver: Class<*>, channelID: String, layout: String, visible: Int) {
         when (layout) {
+            Notimote.POWER ->{
+                mSmallNotificationLayout.setOnClickPendingIntent(
+                    R.id.notimote_ImageButton_power,
+                    makePendingIntent(receiver, channelID, Notimote.POWER_BUTTON)
+                )
+                mBigNotificationLayout.setOnClickPendingIntent(
+                    R.id.notimote_ImageButton_power,
+                    makePendingIntent(receiver, channelID, Notimote.POWER_BUTTON)
+                )
+            }
             Notimote.SOUND -> {
                 mBigNotificationLayout.setViewVisibility(R.id.notimote_layout_sound, visible)
                 mBigNotificationLayout.setOnClickPendingIntent(

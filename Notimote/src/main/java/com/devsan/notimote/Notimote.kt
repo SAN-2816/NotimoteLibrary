@@ -4,6 +4,7 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
+import android.view.View
 
 // 베이스 아이콘 필수!!
 open class Notimote {
@@ -84,10 +85,7 @@ open class Notimote {
 
     fun setLayoutVisible(layoutID: String, visible: Int) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            notimoteView.setButtonPower(
-                mReceiverClass,
-                mNotificationChannel.id.toString()
-            )
+            notimoteView.setLayoutVisible(mReceiverClass, mNotificationChannel.id.toString(), Notimote.POWER, View.VISIBLE)
             notimoteView.setLayoutVisible(
                 mReceiverClass,
                 mNotificationChannel.id.toString(),
@@ -95,19 +93,16 @@ open class Notimote {
                 visible
             )
         } else {
-            notimoteView.setButtonPower(
-                mReceiverClass,
-                layoutID
-            )
+            notimoteView.setLayoutVisible(mReceiverClass, mChannel, Notimote.POWER, View.VISIBLE)
             notimoteView.setLayoutVisible(mReceiverClass, mChannel, layoutID, visible)
         }
     }
 
     fun setLayoutVisible(layoutIDs: Array<String>, visible: Int) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            notimoteView.setButtonPower(mReceiverClass, mNotificationChannel.id)
+            notimoteView.setLayoutVisible(mReceiverClass, mNotificationChannel.id.toString(), Notimote.POWER, View.VISIBLE)
         } else {
-            notimoteView.setButtonPower(mReceiverClass, mChannel)
+            notimoteView.setLayoutVisible(mReceiverClass, mChannel, Notimote.POWER, View.VISIBLE)
         }
         for (id in layoutIDs) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
