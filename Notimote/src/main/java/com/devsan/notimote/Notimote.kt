@@ -6,7 +6,6 @@ import android.content.Context
 import android.os.Build
 import android.view.View
 
-// 베이스 아이콘 필수!!
 open class Notimote {
     companion object {
         const val POWER = "notimote.power"
@@ -30,7 +29,7 @@ open class Notimote {
 
     private lateinit var notimoteView: NotimoteView
     private lateinit var mContext: Context
-    private lateinit var mReceiverClass: Class<*>
+    private lateinit var mReceiverClass: Class<NotimoteReceiver>
     private lateinit var mChannel: String // SDK 26 미만을 위해 채널을 String으로 받음.
     private lateinit var mNotificationManager: NotificationManager
     private lateinit var mNotificationChannel: NotificationChannel
@@ -53,7 +52,7 @@ open class Notimote {
         notimoteView = NotimoteView(mContext)
     }
 
-    fun receiverClass(receiverClass: () -> Class<*>) {
+    fun receiverClass(receiverClass: () -> Class<NotimoteReceiver>) {
         this.mReceiverClass = receiverClass()
     }
 
