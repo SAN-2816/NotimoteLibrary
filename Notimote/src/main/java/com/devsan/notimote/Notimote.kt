@@ -29,7 +29,7 @@ open class Notimote {
 
     private lateinit var notimoteView: NotimoteView
     private lateinit var mContext: Context
-    private lateinit var mReceiverClass: Class<NotimoteReceiver>
+    private lateinit var mReceiverClass: Class<*>
     private lateinit var mChannel: String // SDK 26 미만을 위해 채널을 String으로 받음.
     private lateinit var mNotificationManager: NotificationManager
     private lateinit var mNotificationChannel: NotificationChannel
@@ -52,7 +52,7 @@ open class Notimote {
         notimoteView = NotimoteView(mContext)
     }
 
-    fun receiverClass(receiverClass: () -> Class<NotimoteReceiver>) {
+    fun receiverClass(receiverClass: () -> Class<*>) {
         this.mReceiverClass = receiverClass()
     }
 

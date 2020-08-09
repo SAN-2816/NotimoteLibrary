@@ -20,7 +20,7 @@ class NotimoteView(context: Context) {
         RemoteViews(context.packageName, R.layout.notimote_layout_big)
 
     private fun makePendingIntent(
-        receiver: Class<NotimoteReceiver>,
+        receiver: Class<*>,
         channelID: String,
         name: String?
     ): PendingIntent? {
@@ -81,7 +81,7 @@ class NotimoteView(context: Context) {
 
     }
 
-    fun setLayoutVisible(receiver: Class<NotimoteReceiver>, channelID: String, layout: String, visible: Int) {
+    fun setLayoutVisible(receiver: Class<*>, channelID: String, layout: String, visible: Int) {
         when (layout) {
             Notimote.POWER ->{
                 mSmallNotificationLayout.setOnClickPendingIntent(
