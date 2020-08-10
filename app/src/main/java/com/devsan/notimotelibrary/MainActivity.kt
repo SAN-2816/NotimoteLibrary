@@ -30,7 +30,9 @@ class MainActivity : AppCompatActivity() {
                 receiverClass { MainReceiver::class.java }
                 notificationManager { notificationManager }
                 notificationChannel { channel }
+                setTextString { "바뀌는지 확인차원에서 연락드렸습니다. 더길게 쓰면 어떻게 되는지 궁금합니다." }
                 setLayoutVisible(arrayOf(Notimote.SOUND, Notimote.CHANNEL, Notimote.PLAYSTOP), View.VISIBLE)
+
             }
         } else {
             Notimote().init {

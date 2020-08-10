@@ -82,9 +82,18 @@ open class Notimote {
         this.mIconID = iconID()
     }
 
+    fun setTextString(string: () -> String) {
+        notimoteView.setTextPowerPlaylist(string())
+    }
+
     fun setLayoutVisible(layoutID: String, visible: Int) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            notimoteView.setLayoutVisible(mReceiverClass, mNotificationChannel.id.toString(), Notimote.POWER, View.VISIBLE)
+            notimoteView.setLayoutVisible(
+                mReceiverClass,
+                mNotificationChannel.id.toString(),
+                Notimote.POWER,
+                View.VISIBLE
+            )
             notimoteView.setLayoutVisible(
                 mReceiverClass,
                 mNotificationChannel.id.toString(),
@@ -99,7 +108,12 @@ open class Notimote {
 
     fun setLayoutVisible(layoutIDs: Array<String>, visible: Int) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            notimoteView.setLayoutVisible(mReceiverClass, mNotificationChannel.id.toString(), Notimote.POWER, View.VISIBLE)
+            notimoteView.setLayoutVisible(
+                mReceiverClass,
+                mNotificationChannel.id.toString(),
+                Notimote.POWER,
+                View.VISIBLE
+            )
         } else {
             notimoteView.setLayoutVisible(mReceiverClass, mChannel, Notimote.POWER, View.VISIBLE)
         }

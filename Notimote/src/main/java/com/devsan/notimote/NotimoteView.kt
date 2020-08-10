@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.widget.RemoteViews
+import android.widget.TextView
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat.getSystemService
 
@@ -77,13 +78,15 @@ class NotimoteView(context: Context) {
         }
     }
 
-    fun setTextPowerPlaylist(){
+    fun setTextPowerPlaylist(text: String) {
+        mSmallNotificationLayout.setTextViewText(R.id.notimote_TextView_playlist, text)
+        mBigNotificationLayout.setTextViewText(R.id.notimote_TextView_playlist, text)
 
     }
 
     fun setLayoutVisible(receiver: Class<*>, channelID: String, layout: String, visible: Int) {
         when (layout) {
-            Notimote.POWER ->{
+            Notimote.POWER -> {
                 mSmallNotificationLayout.setOnClickPendingIntent(
                     R.id.notimote_ImageButton_power,
                     makePendingIntent(receiver, channelID, Notimote.POWER_BUTTON)

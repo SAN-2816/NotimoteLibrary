@@ -7,7 +7,7 @@
 
     <ImageButton
         android:id="@+id/notimote_ImageButton_power"
-        android:layout_width="wrap_content"
+        android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
         android:layout_weight="1"
@@ -17,6 +17,8 @@
     <TextView
         android:id="@+id/notimote_TextView_playlist"
         style="@style/TextAppearance.Compat.Notification.Title"
+        android:maxLines="1"
+        android:ellipsize="end"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="4"
