@@ -10,6 +10,9 @@ import android.view.View
 import com.devsan.notimote.Notimote
 
 class MainActivity : AppCompatActivity() {
+    companion object{
+        const val NOTIMOTE_CHANNEL = 1010
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -20,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val name = "Notimote"
             val importance = NotificationManager.IMPORTANCE_DEFAULT
-            val channel = NotificationChannel("1010", name, importance)
+            val channel = NotificationChannel(NOTIMOTE_CHANNEL.toString(), name, importance)
 
             Notimote().init {
                 with { this@MainActivity }
@@ -34,7 +37,7 @@ class MainActivity : AppCompatActivity() {
                 with { this@MainActivity }
                 receiverClass { MainReceiver::class.java }
                 notificationManager { notificationManager }
-                channel { "1010" }
+                channel { NOTIMOTE_CHANNEL.toString() }
                 setLayoutVisible(
                     arrayOf(Notimote.SOUND, Notimote.CHANNEL, Notimote.PLAYSTOP),
                     View.VISIBLE

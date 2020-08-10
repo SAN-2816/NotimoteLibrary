@@ -6,7 +6,6 @@ import android.content.Context
 import android.os.Build
 import android.view.View
 
-// 베이스 아이콘 필수!!
 open class Notimote {
     companion object {
         const val POWER = "notimote.power"
