@@ -11,7 +11,6 @@ import android.widget.TextView
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat.getSystemService
 
-// 레아이웃 설정 및 버튼 설정 추가 해야함.
 class NotimoteView(context: Context) {
     private val mContext = context
 
@@ -51,6 +50,7 @@ class NotimoteView(context: Context) {
         iconID: Int
     ) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            notificationChannel.vibrationPattern = longArrayOf(0) // 알림창 생성 진동 끄기
             val customNotification: NotificationCompat.Builder =
                 buildNotification(notificationChannel.id, iconID)
             notificationManager.createNotificationChannel(notificationChannel)
@@ -81,7 +81,6 @@ class NotimoteView(context: Context) {
     fun setTextPowerPlaylist(text: String) {
         mSmallNotificationLayout.setTextViewText(R.id.notimote_TextView_playlist, text)
         mBigNotificationLayout.setTextViewText(R.id.notimote_TextView_playlist, text)
-
     }
 
     fun setLayoutVisible(receiver: Class<*>, channelID: String, layout: String, visible: Int) {

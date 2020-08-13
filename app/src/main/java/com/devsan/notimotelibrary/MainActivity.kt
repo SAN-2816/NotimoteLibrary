@@ -13,6 +13,7 @@ class MainActivity : AppCompatActivity() {
     companion object{
         const val NOTIMOTE_CHANNEL = 1010
     }
+    lateinit var notimote: Notimote
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -25,7 +26,8 @@ class MainActivity : AppCompatActivity() {
             val importance = NotificationManager.IMPORTANCE_DEFAULT
             val channel = NotificationChannel(NOTIMOTE_CHANNEL.toString(), name, importance)
 
-            Notimote().init {
+            notimote = Notimote()
+            notimote.init {
                 with { this@MainActivity }
                 receiverClass { MainReceiver::class.java }
                 notificationManager { notificationManager }
