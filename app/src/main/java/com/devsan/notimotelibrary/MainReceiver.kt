@@ -7,6 +7,6 @@ import com.devsan.notimote.NotimoteReceiver
 
 class MainReceiver :NotimoteReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
-        Log.e("receiver", intent?.action)
+        Log.e("receiver", intent?.action.toString())
     }
 }
