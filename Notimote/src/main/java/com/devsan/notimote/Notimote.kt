@@ -83,7 +83,7 @@ open class Notimote {
     }
 
     fun initTextPlaylist(string: () -> String){
-
+        notimoteView.initTextPlaylist(string())
     }
 
     fun setTextPlaylist(text: String) {
