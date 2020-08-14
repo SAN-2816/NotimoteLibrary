@@ -6,14 +6,18 @@ import android.content.Context
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.Button
 import com.devsan.notimote.Notimote
 
 class MainActivity : AppCompatActivity() {
-    companion object{
+    companion object {
         const val NOTIMOTE_CHANNEL = 1010
     }
-    lateinit var notimote: Notimote
+
+    private val notimote: Notimote = Notimote()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -26,18 +30,19 @@ class MainActivity : AppCompatActivity() {
             val importance = NotificationManager.IMPORTANCE_DEFAULT
             val channel = NotificationChannel(NOTIMOTE_CHANNEL.toString(), name, importance)
 
-            notimote = Notimote()
             notimote.init {
                 with { this@MainActivity }
                 receiverClass { MainReceiver::class.java }
                 notificationManager { notificationManager }
                 notificationChannel { channel }
-                setTextString { "바뀌는지 확인차원에서 연락드렸습니다. 더길게 쓰면 어떻게 되는지 궁금합니다." }
-                setLayoutVisible(arrayOf(Notimote.SOUND, Notimote.CHANNEL, Notimote.PLAYSTOP), View.VISIBLE)
-
+                initTextPlaylist { "새로운시작" }
+                setLayoutVisible(
+                    arrayOf(Notimote.SOUND, Notimote.CHANNEL, Notimote.PLAYSTOP),
+                    View.VISIBLE
+                )
             }
         } else {
-            Notimote().init {
+            notimote.init {
                 with { this@MainActivity }
                 receiverClass { MainReceiver::class.java }
                 notificationManager { notificationManager }
@@ -47,6 +52,14 @@ class MainActivity : AppCompatActivity() {
                     View.VISIBLE
                 )
             }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val button = findViewById<Button>(R.id.Main_button)
+        button.setOnClickListener {
+            notimote.setTextPlaylist("change")
         }
     }
 }

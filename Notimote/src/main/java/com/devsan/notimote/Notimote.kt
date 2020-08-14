@@ -45,7 +45,7 @@ open class Notimote {
     }
 
     //초기화 함수. 외부에서 초기화.
-    fun init(lambda: Notimote.() -> Unit) = Notimote().apply(lambda).build()
+    fun init(lambda: Notimote.() -> Unit) = this.apply(lambda).build()
 
     fun with(context: () -> Context) {
         this.mContext = context()
@@ -82,8 +82,12 @@ open class Notimote {
         this.mIconID = iconID()
     }
 
-    fun setTextString(string: () -> String) {
-        notimoteView.setTextPowerPlaylist(string())
+    fun initTextPlaylist(string: () -> String){
+
+    }
+
+    fun setTextPlaylist(text: String) {
+        notimoteView.setTextPlaylist(text)
     }
 
     fun setLayoutVisible(layoutID: String, visible: Int) {

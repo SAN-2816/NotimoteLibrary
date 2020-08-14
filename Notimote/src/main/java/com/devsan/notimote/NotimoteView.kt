@@ -13,6 +13,10 @@ import androidx.core.content.ContextCompat.getSystemService
 
 class NotimoteView(context: Context) {
     private val mContext = context
+    private lateinit var mChannel: String // SDK 26 미만을 위해 채널을 String으로 받음.
+    private lateinit var mNotificationManager: NotificationManager
+    private lateinit var mNotificationChannel: NotificationChannel
+    private lateinit var mBuilder: NotificationCompat.Builder
 
     private val mSmallNotificationLayout: RemoteViews =
         RemoteViews(context.packageName, R.layout.notimote_layout_small)
@@ -49,14 +53,15 @@ class NotimoteView(context: Context) {
         notificationChannel: NotificationChannel,
         iconID: Int
     ) {
+        mNotificationManager = notificationManager
+        mNotificationChannel = notificationChannel
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             notificationChannel.vibrationPattern = longArrayOf(0) // 알림창 생성 진동 끄기
-            val customNotification: NotificationCompat.Builder =
-                buildNotification(notificationChannel.id, iconID)
+            mBuilder = buildNotification(notificationChannel.id, iconID)
             notificationManager.createNotificationChannel(notificationChannel)
             notificationManager.notify(
                 notificationChannel.id.toInt(),
-                customNotification.build()
+                mBuilder.build()
             )
         }
     }
@@ -69,18 +74,29 @@ class NotimoteView(context: Context) {
 
     ) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
-            val customNotification: NotificationCompat.Builder =
-                buildNotification(channelID, iconID)
+            mBuilder = buildNotification(channelID, iconID)
             notificationManager.notify(
                 channelID.toInt(),
-                customNotification.build()
+                mBuilder.build()
             )
         }
     }
 
-    fun setTextPowerPlaylist(text: String) {
+    fun initTextPlaylist(text: String){
         mSmallNotificationLayout.setTextViewText(R.id.notimote_TextView_playlist, text)
         mBigNotificationLayout.setTextViewText(R.id.notimote_TextView_playlist, text)
+    }
+
+    fun setTextPlaylist(text: String) {
+        mSmallNotificationLayout.setTextViewText(R.id.notimote_TextView_playlist, text)
+        mBigNotificationLayout.setTextViewText(R.id.notimote_TextView_playlist, text)
+        mBuilder.setCustomContentView(mSmallNotificationLayout)
+        mBuilder.setCustomBigContentView(mBigNotificationLayout)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            mNotificationManager.notify(mNotificationChannel.id.toInt(), mBuilder.build())
+        }else{
+            mNotificationManager.notify(mChannel.toInt(), mBuilder.build())
+        }
     }
 
     fun setLayoutVisible(receiver: Class<*>, channelID: String, layout: String, visible: Int) {
