@@ -1,6 +1,5 @@
 package com.devsan.notimote
 
-import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -9,6 +8,7 @@ import android.content.Intent
 import android.os.Build
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
+import com.devsan.notimote.lockScreen.LockService
 
 class NotimoteView(context: Context) {
     private val mContext = context
@@ -52,6 +52,10 @@ class NotimoteView(context: Context) {
         notificationChannel: NotificationChannel,
         iconID: Int
     ) {
+        //잠금화면 설정.
+        val intent = Intent(mContext, LockService::class.java)
+        mContext.startService(intent)
+
         mNotificationManager = notificationManager
         mNotificationChannel = notificationChannel
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -81,7 +85,7 @@ class NotimoteView(context: Context) {
         }
     }
 
-    fun initTextPlaylist(text: String){
+    fun initTextPlaylist(text: String) {
         mSmallNotificationLayout.setTextViewText(R.id.notimote_TextView_playlist, text)
         mBigNotificationLayout.setTextViewText(R.id.notimote_TextView_playlist, text)
     }
@@ -93,7 +97,7 @@ class NotimoteView(context: Context) {
         mBuilder.setCustomBigContentView(mBigNotificationLayout)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             mNotificationManager.notify(mNotificationChannel.id.toInt(), mBuilder.build())
-        }else{
+        } else {
             mNotificationManager.notify(mChannel.toInt(), mBuilder.build())
         }
     }
