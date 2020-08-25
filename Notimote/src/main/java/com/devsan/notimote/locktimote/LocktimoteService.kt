@@ -4,10 +4,9 @@ import android.app.Service
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.IBinder
-import com.devsan.notimote.lockScreen.LockReceiver
 
 class LocktimoteService : Service() {
-    private val lockReceiver: LockReceiver = LockReceiver()
+    private val lockReceiver: LocktimoteReceiver = LocktimoteReceiver()
 
     override fun onBind(intent: Intent?): IBinder? {
         return null

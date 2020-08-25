@@ -3,12 +3,9 @@
     package="com.devsan.notimote">
 
     <application>
-        <activity android:name=".locktimote.LocktimoteActivity"></activity>
-        <activity android:name=".lockScreen.LockScreenActivity" />
-
-        <receiver android:name=".lockScreen.LockReceiver" />
-
-        <service android:name=".lockScreen.LockService" />
+        <activity android:name=".locktimote.LocktimoteActivity"/>
+        <receiver android:name=".locktimote.LocktimoteReceiver"/>
+        <service android:name=".locktimote.LocktimoteService"/>
     </application>
 
 </manifest>

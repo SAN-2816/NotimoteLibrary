@@ -8,7 +8,7 @@ import android.content.Intent
 import android.os.Build
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
-import com.devsan.notimote.lockScreen.LockService
+import com.devsan.notimote.locktimote.LocktimoteService
 
 class NotimoteView(context: Context) {
     private val mContext = context
@@ -53,7 +53,7 @@ class NotimoteView(context: Context) {
         iconID: Int
     ) {
         //잠금화면 설정.
-        val intent = Intent(mContext, LockService::class.java)
+        val intent = Intent(mContext, LocktimoteService::class.java)
         mContext.startService(intent)
 
         mNotificationManager = notificationManager

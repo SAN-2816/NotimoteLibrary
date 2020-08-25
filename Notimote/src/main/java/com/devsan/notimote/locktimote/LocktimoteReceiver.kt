@@ -4,7 +4,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 
-class LocktimoteReceiver:BroadcastReceiver() {
+class LocktimoteReceiver : BroadcastReceiver() {
     var first: Long = 0
 
     override fun onReceive(context: Context?, intent: Intent?) {
