@@ -3,14 +3,11 @@ package com.devsan.notimotelibrary
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
-import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.View
-import android.view.WindowManager
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import com.devsan.notimote.LockScreen.LockService
 import com.devsan.notimote.Notimote
 
 class MainActivity : AppCompatActivity() {
@@ -60,7 +57,5 @@ class MainActivity : AppCompatActivity() {
         button.setOnClickListener {
             notimote.setTextPlaylist("change")
         }
-//        val intent = Intent(this, LockService::class.java)
-//        startService(intent)
     }
 }
