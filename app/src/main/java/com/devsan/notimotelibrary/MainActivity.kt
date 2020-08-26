@@ -5,12 +5,14 @@ import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.view.Window
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.devsan.notimote.Notimote
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), View.OnClickListener {
     companion object {
         const val NOTIMOTE_CHANNEL = 1010
     }
@@ -35,7 +37,7 @@ class MainActivity : AppCompatActivity() {
                 receiverClass { MainReceiver::class.java }
                 notificationManager { notificationManager }
                 notificationChannel { channel }
-                initTextPlaylist { "새로운시작" }
+                initTextPlaylist { "재생목록" }
                 setLayoutVisible(
                     arrayOf(Notimote.SOUND, Notimote.CHANNEL, Notimote.PLAYSTOP, Notimote.HOME),
                     View.VISIBLE
@@ -57,5 +59,16 @@ class MainActivity : AppCompatActivity() {
         button.setOnClickListener {
             notimote.setTextPlaylist("change")
         }
+    }
+
+    override fun onClick(v: View?) {
+        Log.e("Main", v?.id.toString())
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        val notificationManager: NotificationManager =
+            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager.cancel(NOTIMOTE_CHANNEL)
     }
 }

@@ -1,24 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/background_dark"
+    tools:context=".locktimote.LocktimoteActivity">
 
-    <data>
+    <include layout="@layout/notimote_layout_small" />
+    <include
+        android:id="@+id/notimote_layout_sound"
+        layout="@layout/notimote_layout_sound" />
 
-        <variable
-            name="activityLocktimote"
-            type="com.devsan.notimote.locktimote.LocktimoteActivity" />
-    </data>
+    <include
+        android:id="@+id/notimote_layout_channel"
+        layout="@layout/notimote_layout_channel" />
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".locktimote.LocktimoteActivity">
-        <TextView
-            android:id="@+id/locktimote_TextView"
-            android:text="1234"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
-</layout>
+    <include
+        android:id="@+id/notimote_layout_home"
+        layout="@layout/notimote_layout_home" />
+
+    <include
+        android:id="@+id/notimote_layout_playstop"
+        layout="@layout/notimote_layout_playstop" />
+</LinearLayout>
