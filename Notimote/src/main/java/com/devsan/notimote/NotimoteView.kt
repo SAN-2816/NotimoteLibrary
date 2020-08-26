@@ -52,9 +52,6 @@ class NotimoteView(context: Context) {
         notificationChannel: NotificationChannel,
         iconID: Int
     ) {
-        //잠금화면 설정.
-        val intent = Intent(mContext, LocktimoteService::class.java)
-        mContext.startService(intent)
 
         mNotificationManager = notificationManager
         mNotificationChannel = notificationChannel
